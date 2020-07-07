@@ -585,6 +585,18 @@
     opacity: 0.9999;
   }
 
+  &-hide-scrollbar {
+    scrollbar-color: transparent transparent;
+    min-width: unset;
+
+    &::-webkit-scrollbar {
+      // set min width to window chrome scrollbar
+      // https://github.com/ant-design/ant-design/issues/19952#issuecomment-559367149
+      min-width: inherit;
+      background-color: transparent;
+    }
+  }
+
   &-fixed-left,
   &-fixed-right {
     position: absolute;
