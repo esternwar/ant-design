@@ -24,6 +24,20 @@ export default class SelectionBox extends React.Component<SelectionBoxProps, Sel
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  getCheckState(props: SelectionBoxProps) {
+    const { store, defaultSelection, rowIndex } = props;
+    let checked = false;
+    if (store.getState().selectionDirty) {
+      checked = store.getState().selectedRowKeys.indexOf(rowIndex) >= 0;
+    } else {
+      checked =
+        store.getState().selectedRowKeys.indexOf(rowIndex) >= 0 ||
+        defaultSelection.indexOf(rowIndex) >= 0;
+    }
+    return checked;
+  }
+
   subscribe() {
     const { store } = this.props;
     this.unsubscribe = store.subscribe(() => {
@@ -32,37 +46,13 @@ export default class SelectionBox extends React.Component<SelectionBoxProps, Sel
     });
   }
 
-  getCheckState(props: SelectionBoxProps) {
-    const { store, defaultSelection, rowIndex } = props;
-    let checked = false;
-    if (store.getState().selectionDirty) {
-      checked = store.getState().selectedRowKeys.indexOf(rowIndex) >= 0;
-    } else {
-      checked = (store.getState().selectedRowKeys.indexOf(rowIndex) >= 0 ||
-                 defaultSelection.indexOf(rowIndex) >= 0);
-    }
-    return checked;
-  }
-
   render() {
     const { type, rowIndex, ...rest } = this.props;
     const { checked } = this.state;
 
     if (type === 'radio') {
-      return (
-        <Radio
-          checked={checked}
-          value={rowIndex}
-          {...rest}
-        />
-      );
-    } else {
-      return (
-        <Checkbox
-          checked={checked}
-          {...rest}
-        />
-      );
+      return <Radio checked={checked} value={rowIndex} {...rest} />;
     }
+    return <Checkbox checked={checked} {...rest} />;
   }
 }

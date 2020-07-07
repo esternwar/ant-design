@@ -1,13 +1,14 @@
 import * as React from 'react';
 
 export interface FilterDropdownMenuWrapperProps {
-  onClick?: React.MouseEventHandler<any>;
-  children?: any;
+  children?: React.ReactNode;
   className?: string;
 }
 
-export default (props: FilterDropdownMenuWrapperProps) => (
-  <div className={props.className} onClick={props.onClick}>
+const FilterDropdownMenuWrapper = (props: FilterDropdownMenuWrapperProps) => (
+  <div className={props.className} onClick={e => e.stopPropagation()}>
     {props.children}
   </div>
 );
+
+export default FilterDropdownMenuWrapper;
