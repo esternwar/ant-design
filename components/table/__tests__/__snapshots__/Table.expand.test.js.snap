@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Table.pagination Accepts pagination as true 1`] = `
+exports[`Table.expand click to expand 1`] = `
 <div
   class="ant-table-wrapper"
 >
@@ -54,42 +54,37 @@ exports[`Table.pagination Accepts pagination as true 1`] = `
               >
                 <tr
                   class="ant-table-row ant-table-row-level-0"
-                  data-row-key="0"
-                >
-                  <td
-                    class=""
-                  >
-                    Jack
-                  </td>
-                </tr>
-                <tr
-                  class="ant-table-row ant-table-row-level-0"
                   data-row-key="1"
                 >
                   <td
                     class=""
                   >
-                    Lucy
+                    <span
+                      class="ant-table-row-indent indent-level-0"
+                      style="padding-left: 0px;"
+                    />
+                    <div
+                      aria-label="Collapse row"
+                      class="ant-table-row-expand-icon ant-table-row-expanded"
+                      role="button"
+                      tabindex="0"
+                    />
                   </td>
                 </tr>
                 <tr
-                  class="ant-table-row ant-table-row-level-0"
+                  class="ant-table-row ant-table-row-level-1"
                   data-row-key="2"
                 >
                   <td
                     class=""
                   >
-                    Tom
-                  </td>
-                </tr>
-                <tr
-                  class="ant-table-row ant-table-row-level-0"
-                  data-row-key="3"
-                >
-                  <td
-                    class=""
-                  >
-                    Jerry
+                    <span
+                      class="ant-table-row-indent indent-level-1"
+                      style="padding-left: 20px;"
+                    />
+                    <span
+                      class="ant-table-row-expand-icon ant-table-row-spaced"
+                    />
                   </td>
                 </tr>
               </tbody>
@@ -174,7 +169,7 @@ exports[`Table.pagination Accepts pagination as true 1`] = `
 </div>
 `;
 
-exports[`Table.pagination renders pagination correctly 1`] = `
+exports[`Table.expand should support expandIconColumnIndex 1`] = `
 <div
   class="ant-table-wrapper"
 >
@@ -196,63 +191,24 @@ exports[`Table.pagination renders pagination correctly 1`] = `
             <table
               class=""
             >
-              <colgroup>
-                <col />
-              </colgroup>
+              <colgroup />
               <thead
                 class="ant-table-thead"
-              >
-                <tr>
-                  <th
-                    class="ant-table-row-cell-last"
-                  >
-                    <span
-                      class="ant-table-header-column"
-                    >
-                      <div>
-                        <span
-                          class="ant-table-column-title"
-                        >
-                          Name
-                        </span>
-                        <span
-                          class="ant-table-column-sorter"
-                        />
-                      </div>
-                    </span>
-                  </th>
-                </tr>
-              </thead>
+              />
               <tbody
                 class="ant-table-tbody"
               >
                 <tr
                   class="ant-table-row ant-table-row-level-0"
-                  data-row-key="0"
-                >
-                  <td
-                    class=""
-                  >
-                    Jack
-                  </td>
-                </tr>
-                <tr
-                  class="ant-table-row ant-table-row-level-0"
                   data-row-key="1"
-                >
-                  <td
-                    class=""
-                  >
-                    Lucy
-                  </td>
-                </tr>
+                />
               </tbody>
             </table>
           </div>
         </div>
       </div>
       <ul
-        class="ant-pagination my-page ant-table-pagination"
+        class="ant-pagination ant-table-pagination"
         unselectable="unselectable"
       >
         <li
@@ -294,18 +250,8 @@ exports[`Table.pagination renders pagination correctly 1`] = `
           </a>
         </li>
         <li
-          class="ant-pagination-item ant-pagination-item-2"
-          tabindex="0"
-          title="2"
-        >
-          <a>
-            2
-          </a>
-        </li>
-        <li
-          aria-disabled="false"
-          class=" ant-pagination-next"
-          tabindex="0"
+          aria-disabled="true"
+          class="ant-pagination-disabled ant-pagination-next"
           title="Next Page"
         >
           <a

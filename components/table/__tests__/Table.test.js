@@ -1,10 +1,19 @@
 import React from 'react';
 import { render, shallow, mount } from 'enzyme';
 import Table from '..';
+import mountTest from '../../../tests/shared/mountTest';
 
 const { Column, ColumnGroup } = Table;
 
 describe('Table', () => {
+  mountTest(Table);
+
+  const warnSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+  afterAll(() => {
+    warnSpy.mockRestore();
+  });
+
   it('renders JSX correctly', () => {
     const data = [
       {
@@ -28,6 +37,8 @@ describe('Table', () => {
           <Column title="Last Name" dataIndex="lastName" key="lastName" />
         </ColumnGroup>
         <Column title="Age" dataIndex="age" key="age" />
+        {/* eslint-disable-next-line react/jsx-curly-brace-presence */}
+        {'invalid child'}
       </Table>,
     );
 
@@ -52,7 +63,7 @@ describe('Table', () => {
     ];
     wrapper.setProps({ columns: newColumns });
 
-    expect(wrapper.instance().columns).toBe(newColumns);
+    expect(wrapper.dive().state('columns')).toBe(newColumns);
   });
 
   it('loading with Spin', async () => {
@@ -79,5 +90,21 @@ describe('Table', () => {
     const wrapper = mount(<Table components={{ body: { wrapper: BodyWrapper1 } }} />);
     wrapper.setProps({ components: { body: { wrapper: BodyWrapper2 } } });
     expect(wrapper.find('tbody').props().id).toBe('wrapper2');
+  });
+
+  it('warning if both `expandedRowRender` & `Column.fixed` are used', () => {
+    mount(<Table expandedRowRender={() => null} columns={[{ fixed: true }]} />);
+    expect(warnSpy).toHaveBeenCalledWith(
+      'Warning: [antd: Table] `expandedRowRender` and `Column.fixed` are not compatible. Please use one of them at one time.',
+    );
+  });
+
+  it('support onHeaderCell', () => {
+    const onClick = jest.fn();
+    const wrapper = mount(
+      <Table columns={[{ title: 'title', onHeaderCell: () => ({ onClick }) }]} />,
+    );
+    wrapper.find('th').simulate('click');
+    expect(onClick).toHaveBeenCalled();
   });
 });
